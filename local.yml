@@ -1,0 +1,14 @@
+- name: Install cowsay
+  hosts: all
+  tasks:
+    - name: Install RPM
+      yum:
+        name: cowsay
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install DEB
+      apt: 
+        name: cowsay
+        state: present
+      when: ansible_os_family == 'Debian'
