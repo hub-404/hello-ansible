@@ -1,0 +1,3 @@
+ansible_pull_repo: https://github.com/hub-404/hello-ansible
+ansible_pull_cron_time: 'hourly'
+ansible_pull_cron_name: 'ansible-pull'
