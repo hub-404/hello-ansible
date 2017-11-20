@@ -14,8 +14,14 @@
       when: ansible_os_family == 'Debian'
 
     - name: Add cronjob
-      crontab:
+      cron:
          name: '{{ ansible_pull_cron_name }}'
          special_time: '{{ ansible_pull_cron_time }}'
          job: ansible-pull -U  {{ ansible_pull_repo }}
          state: present
+
+    - name: Get current time
+      get_url:
+         url: https://now.httpbin.org/
+         dest: /tmp/ansible-last.run.txt
+         force: yes
