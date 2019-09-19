@@ -14,5 +14,5 @@
       when: ansible_os_family == 'Debian'
       
     - name: Test cowsay
-      shell: echo "Hello world" | cowsay
+      shell: echo '{{ cowsay_greeting }}' | cowsay
       changed_when: False
