@@ -16,3 +16,7 @@
     - name: Test cowsay
       shell: echo '{{ cowsay_greeting }}' | cowsay
       changed_when: False
+
+    - name: Set Cowsay fact
+      set_fact:
+        cowsay_is_great: true

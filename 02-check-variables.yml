@@ -1,0 +1,6 @@
+- name: Test cowsay facts
+  hosts: all
+  tasks:
+    - name: Show Cowsay fact
+      debug:
+        var: cowsay_is_great
