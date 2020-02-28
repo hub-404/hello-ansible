@@ -3,4 +3,4 @@
   tasks:
     - name: Show Cowsay fact
       debug:
-        var: cowsay_is_great
+        msg: 'cowsay_fact: {{ cowsay_is_great }}'
