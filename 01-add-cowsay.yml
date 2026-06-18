@@ -14,7 +14,7 @@
       when: ansible_os_family == 'Debian'
       
     - name: Test cowsay
-      shell: echo '{{ cowsay_greeting }}' | cowsay
+      shell: echo '{{ cowsay_greeting }}' | /usr/games/cowsay
       changed_when: False
 
     - name: Set Cowsay fact
