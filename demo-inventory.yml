@@ -1,0 +1,8 @@
+demo:
+  hosts:
+    ansible-silkworm.d53.cz:
+    ansible-antelope.d53.cz:
+
+  vars:
+    ansible_user: ansible
+    ansible_become: true
