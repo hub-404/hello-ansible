@@ -6,9 +6,10 @@
 
   tasks:
     - name: Ensure backup directory exists
-      path: '{{ backup_dir }}'
-      state: directory
-      mode: '0700'
+      file:
+        path: '{{ backup_dir }}'
+        state: directory
+        mode: '0700'
 
     - name: Create backup name with timestamp
       set_fact:
