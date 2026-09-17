@@ -1,0 +1,23 @@
+- name: Prepare /etc backup
+  hosts: all
+  vars:
+    backup_dir: /var/backups/etc
+    backup_format: gz
+
+  tasks:
+    - name: Ensure backup directory exists
+      path: '{{ backup_dir }}'
+      state: directory
+      mode: '0700'
+
+    - name: Create backup name with timestamp
+      set_fact:
+        archive_name: "etc_backup_{{ ansible_date_time.iso8601_basic_short }}.tar.{{ backup_format}}"
+
+    - name: Create backup of /etc
+      archive:
+        path:
+          - /etc/
+        dest: '{{ backup_dir }}/{{ archive_name }}'
+
+
