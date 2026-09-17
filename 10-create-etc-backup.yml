@@ -16,7 +16,7 @@
         archive_name: "etc_backup_{{ ansible_date_time.iso8601_basic_short }}.tar.{{ backup_format}}"
 
     - name: Create backup of /etc
-      archive:
+      community.general.archive:
         path:
           - /etc/
         dest: '{{ backup_dir }}/{{ archive_name }}'
