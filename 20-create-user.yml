@@ -7,6 +7,7 @@
 
   tasks:
   - name: Ensure name is provided
+    run_once: true
     assert:
       that:
         - user_name is not none
@@ -14,6 +15,7 @@
       success_msg: "User name is provided."
 
   - name: Ensure gecos is provided
+    run_once: true
     assert:
       that:
         - user_gecos is not none
@@ -21,6 +23,7 @@
       success_msg: "User GECOS is provided."
 
   - name: Check password length and complexity
+    run_once: true
     assert:
       that:
         - user_password is not none
