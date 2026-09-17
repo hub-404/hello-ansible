@@ -1,0 +1,45 @@
+- name: Create user in /et
+  hosts: all
+  vars:
+    user_name: ~
+    user_gecos: ~
+    user_password: ~
+
+- name: Ensure name is provided
+  assert:
+    that:
+      - user_name is not none
+    fail_msg: "User name must be provided."
+    success_msg: "User name is provided."
+
+- name: Ensure gecos is provided
+  assert:
+    that:
+      - user_gecos is not none
+    fail_msg: "User GECOS must be provided."
+    success_msg: "User GECOS is provided."
+
+- name: Check password length and complexity
+  assert:
+    that:
+      - user_password is not none
+      - user_password | length >= 8
+      - user_password | regex_search('[A-Z]') is not none
+      - user_password | regex_search('[a-z]') is not none
+      - user_password | regex_search('[0-9]') is not none
+      - user_password | regex_search('[^A-Za-z0-9]') is not none
+    fail_msg: "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
+    success_msg: "Password meets complexity requirements."
+
+- name: Create the user
+  user:
+    name: '{{ user_name }}'
+    comment: '{{ user_gecos }}'
+    password: '{{ user_password | password_hash("sha512") }}'
+    state: present
+
+- name: Verify user creation
+  command: id '{{ user_name }}'
+  register: user_check
+  failed_when: user_check.rc != 0
+  changed_when: false
